@@ -2,9 +2,15 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./build/server",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:reset": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "build": "npx -y tsc",
+    "predev": "npm run build && npm run db:reset",
+    "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
+    "prestart": "npm run build && npm run db:reset",
+    "start": "node .",
+    "test": "mocha -r ts-node/register ./src/tests/integration/**/*$NAME*.{test,spec}.ts -t 10000 --exit"
   },
   "keywords": [],
   "author": "",
