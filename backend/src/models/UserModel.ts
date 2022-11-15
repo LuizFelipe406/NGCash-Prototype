@@ -1,0 +1,30 @@
+import Account from "../database/models/Account";
+import User from "../database/models/Users";
+import sequelize from "../database/models";
+
+export default class UserModel {
+  async create(username: string, password: string): Promise<User> {
+    try {
+      const result = await sequelize.transaction(async (t) => {
+        const newAccount = await Account.create(
+          { balance: 100 },
+          { transaction: t }
+        );
+
+        const newUser = await User.create(
+          { username, password, accountId: newAccount.id },
+          { transaction: t }
+        );
+        return newUser;
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserByUsername(username: string): Promise<User | null> {
+    const user = await User.findOne({ where: { username } });
+    return user;
+  }
+}
