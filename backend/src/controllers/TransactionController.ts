@@ -10,9 +10,12 @@ export default class TransactionController {
 
   async transfer(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId, body: { username, value } } = req;
-      await this.transactionService.transfer(userId, username, value);
-      res.sendStatus(200);
+      const {
+        userId,
+        body: { username, value },
+      } = req;
+      const newTransfer = await this.transactionService.transfer(userId, username, value);
+      res.status(200).json(newTransfer);
     } catch (error) {
       next(error);
     }
@@ -21,8 +24,33 @@ export default class TransactionController {
   async getTransactions(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req;
-      const transactions = await this.transactionService.getTransactions(userId);
+      const transactions = await this.transactionService.getTransactions(
+        userId
+      );
       res.status(200).json(transactions);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getTransactionsByFilter(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const {
+        userId,
+        body: { type, month, year },
+      } = req;
+      const transactions =
+        await this.transactionService.getTransactionsByFilter(
+          userId,
+          type,
+          month,
+          year
+        );
+      return transactions;
     } catch (error) {
       next(error);
     }

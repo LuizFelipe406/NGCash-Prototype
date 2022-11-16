@@ -21,5 +21,7 @@ export default class UserRouter {
     this.router.post('/', (req, res, next) => this.transactionController.transfer(req, res, next));
     
     this.router.get('/', (req, res, next) => this.transactionController.getTransactions(req, res, next));
+
+    this.router.get('/filtered', (req, res, next) => this.transactionController.getTransactionsByFilter(req, res, next));
   }
 }

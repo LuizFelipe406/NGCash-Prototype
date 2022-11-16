@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import ErrorMiddleware from './middlewares/ErrorMiddleware';
-import { userRouter, loginRouter } from './routers';
+import { userRouter, loginRouter, transactionRouter } from './routers';
 
 export default class App {
   public app: express.Express;
@@ -28,6 +28,8 @@ export default class App {
     this.app.use('/user', userRouter.router);
 
     this.app.use('/login', loginRouter.router);
+
+    this.app.use('/transaction', transactionRouter.router);
 
     this.app.use(ErrorMiddleware.handle)
   }

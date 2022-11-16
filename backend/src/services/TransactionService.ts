@@ -16,18 +16,21 @@ export default class TransactionService {
   }
 
   async transfer(userId: number, creditedUsername: string, value: number) {
-    const creditedUser = await this.userModel.getUserByUsername(creditedUsername);
+    const creditedUser = await this.userModel.getUserByUsername(
+      creditedUsername
+    );
     const debitedUser = await this.userModel.getUserById(userId);
     if (!creditedUser || !debitedUser) throw new Error();
 
     const error = await this.validations(creditedUser, debitedUser, value);
     if (error) throw new CustomError(error.message, error.status);
 
-    await this.transactionModel.transfer(
+    const newTransfer = await this.transactionModel.transfer(
       debitedUser.accountId,
       creditedUser.accountId,
       value
     );
+    return newTransfer;
   }
 
   private async validations(
@@ -49,15 +52,54 @@ export default class TransactionService {
     const account = await this.accountModel.getAccountById(debitedAccountId);
     if (!account) throw new Error();
 
-    if (account.balance < value) return { status: 401, message: "invalid funds" };
+    if (account.balance < value)
+      return { status: 401, message: "invalid funds" };
     return null;
   }
 
   async getTransactions(userId: number) {
     const user = await this.userModel.getUserById(userId);
     if (!user) throw new Error();
-    
-    const transactions = await this.transactionModel.getTransactions(user.accountId);
+
+    const transactions = await this.transactionModel.getTransactions(
+      user.accountId
+    );
+    return transactions;
+  }
+
+  async getTransactionsByFilter(
+    userId: number,
+    type: string,
+    month: string,
+    year: string
+  ) {
+    if (!userId || !type || !month || !year)
+      throw new CustomError("fields missing", 400);
+
+    const user = await this.userModel.getUserById(userId);
+    if (!user) throw new Error();
+
+    let typeFilter;
+    switch (type) {
+      case "cash-in":
+        typeFilter = [{ creditedAccountId: user.accountId }];
+        break;
+      case "cash-out":
+        typeFilter = [{ debitedAccountId: user.accountId }];
+        break;
+      default:
+        typeFilter = [
+          { debitedAccountId: user.accountId },
+          { creditedAccountId: user.accountId },
+        ];
+        break;
+    }
+
+    const transactions = await this.transactionModel.getTransactionsByFilter(
+      typeFilter,
+      month,
+      year
+    );
     return transactions;
   }
 }
