@@ -52,4 +52,12 @@ export default class TransactionService {
     if (account.balance < value) return { status: 401, message: "invalid funds" };
     return null;
   }
+
+  async getTransactions(userId: number) {
+    const user = await this.userModel.getUserById(userId);
+    if (!user) throw new Error();
+    
+    const transactions = await this.transactionModel.getTransactions(user.accountId);
+    return transactions;
+  }
 }

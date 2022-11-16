@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import sequelize from "../database/models";
 import Account from "../database/models/Account";
 import Transaction from "../database/models/Transaction";
@@ -20,12 +21,15 @@ export default class TransactionModel {
           { where: { id: creditedAccountId }, transaction: t }
         );
 
-        const transaction = await Transaction.create({
-          debitedAccountId,
-          creditedAccountId,
-          value,
-          createdAt: new Date(Date.now()).toISOString(),
-        }, { transaction: t });
+        const transaction = await Transaction.create(
+          {
+            debitedAccountId,
+            creditedAccountId,
+            value,
+            createdAt: new Date(Date.now()).toISOString(),
+          },
+          { transaction: t }
+        );
 
         return transaction;
       });
@@ -33,5 +37,14 @@ export default class TransactionModel {
     } catch (error) {
       throw error;
     }
+  }
+
+  async getTransactions(id: number): Promise<Transaction[] | null> {
+    const transactions = await Transaction.findAll({
+      where: {
+        [Op.or]: [{ debitedAccountId: id }, { creditedAccountId: id }],
+      },
+    });
+    return transactions;
   }
 }

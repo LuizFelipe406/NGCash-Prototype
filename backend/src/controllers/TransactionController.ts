@@ -17,4 +17,14 @@ export default class TransactionController {
       next(error);
     }
   }
+
+  async getTransactions(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req;
+      const transactions = await this.transactionService.getTransactions(userId);
+      res.status(200).json(transactions);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

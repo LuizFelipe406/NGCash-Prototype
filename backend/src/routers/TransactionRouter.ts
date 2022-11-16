@@ -17,6 +17,9 @@ export default class UserRouter {
 
   private configRoutes() {
     this.router.use(this.authMiddleware.validateToken);
+
     this.router.post('/', (req, res, next) => this.transactionController.transfer(req, res, next));
+    
+    this.router.get('/', (req, res, next) => this.transactionController.getTransactions(req, res, next));
   }
 }
