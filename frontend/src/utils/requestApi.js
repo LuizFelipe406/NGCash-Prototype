@@ -12,8 +12,8 @@ const request = axios.create({
   }
 })
 
-const walletApi = async (method, endpoint, body) => request
-  .request({ method, url: endpoint, data: body})
+const walletApi = async (method, endpoint, body, headers) => request
+  .request({ method, url: endpoint, data: body, headers})
     .then(({ status, data }) => ({ status, data }))
     .catch((error) => error.toJSON());
 
