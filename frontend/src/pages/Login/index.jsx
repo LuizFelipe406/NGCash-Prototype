@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useNavigate } from "react-router-dom";
 import walletApi from "../../utils/requestApi";
+import logo from "../../images/logo-ngcash-branco.svg";
 import "./login.css";
 
 
@@ -44,7 +45,7 @@ function Login() {
       console.log(data);
       console.log(status);
 
-      if(status === 400) {
+      if(status === 401) {
           setLoginSuccesfull(false);
       }
       
@@ -58,28 +59,28 @@ function Login() {
     <div className="login-page">
       <header className="fixed-top header mt-4">
         <div className="ms-5 ps-5 d-flex align-items-center">
-          <h3 className="ms-2 light-color-text">NG.Cash</h3>
+          <img src={ logo } alt="logo-ng" className="logo ms-4" />
         </div>
       </header>
       <div className="left-content mb-5">
-        <h4 className="left-subtitle ms-5 ps-2">START FOR FREE</h4>
+        <h4 className="left-subtitle ms-5 ps-2">PARA TODAS AS IDADES</h4>
         <h1
           className="left-title light-color-text ms-4 ps-4 mt-3 mb-4"
         >
-          Welcome back<span className="text-primary">.</span>
+          A CARTEIRA DA NOVA GERAÇÃO.
         </h1>
-        <h4 className="left-subtitle ms-5 ps-2 mb-5 pb-4">Enter your username and password</h4>
+        <h4 className="left-subtitle ms-5 ps-2 mb-5 pb-4">Digite seu Usuario e Senha</h4>
         <Form className="form-container">
           <FloatingLabel
             controlId="floatingInput"
-            label="Username"
+            label="Usuario"
             className="mb-3 light-color-text input-container"
           >
             <Form.Control
               size="lg"
               value={ username }
               type="text"
-              placeholder="Username"
+              placeholder="Usuario"
               className="input"
               onChange={ handleUsernameChange }
             />
@@ -87,20 +88,20 @@ function Login() {
 
           <FloatingLabel
             controlId="floatingPassword"
-            label="Password"
-            className="light-color-text mb-5 input-container"
+            label="Senha"
+            className="light-color-text mb-3 input-container"
           >
             <Form.Control
               size="lg"
               type="password"
               className="input"
-              placeholder="Password"
+              placeholder="Senha"
               value={ password }
               onChange={ handlePasswordChange }
             />
           </FloatingLabel>
 
-          { LoginSuccesfull === false && <span>Username or Password incorrect</span> }
+          { LoginSuccesfull === false && <span className="text-danger mb-3">Username or Password incorrect</span> }
 
           <div className="btn-container">
             <Button
@@ -109,7 +110,7 @@ function Login() {
               className="btn btn-create-account light-color-text"
               onClick={() => navigate('/register')}
             >
-              Create account
+              Cadastrar
             </Button>
             <Button
               size="md"

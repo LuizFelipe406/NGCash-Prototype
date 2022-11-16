@@ -1,19 +1,19 @@
 version: '3.9'
 services:
-  frontend:
-    container_name: ngcash_frontend
-    build: ./frontend
-    ports:
-      - 3000:3000
-    platform: linux/x86_64
-    working_dir: /app-frontend
-    depends_on:
-      backend:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
-      timeout: 10s
-      retries: 5
+  # frontend:
+  #   container_name: ngcash_frontend
+  #   build: ./frontend
+  #   ports:
+  #     - 3000:3000
+  #   platform: linux/x86_64
+  #   working_dir: /app-frontend
+  #   depends_on:
+  #     backend:
+  #       condition: service_healthy
+  #   healthcheck:
+  #     test: ["CMD", "lsof", "-t", "-i:3000"]
+  #     timeout: 10s
+  #     retries: 5
   backend:
     container_name: ngcash_backend
     build: ./backend
