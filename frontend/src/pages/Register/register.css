@@ -99,3 +99,10 @@
   color: black;
   border: 1px solid black;
 }
+
+.register-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}

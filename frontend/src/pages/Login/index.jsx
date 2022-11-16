@@ -101,7 +101,7 @@ function Login() {
             />
           </FloatingLabel>
 
-          { LoginSuccesfull === false && <span className="text-danger mb-3">Username or Password incorrect</span> }
+          { LoginSuccesfull === false && <span className="text-danger mb-3">Usuário ou Senha incorretos</span> }
 
           <div className="btn-container">
             <Button

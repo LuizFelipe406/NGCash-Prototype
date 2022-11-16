@@ -5,6 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useNavigate } from "react-router-dom";
 import walletApi from "../../utils/requestApi";
 import logo from "../../images/logo-ngcash-branco.svg";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import "./register.css";
 
 
@@ -17,10 +18,10 @@ function Register() {
 
   useEffect(() => {
       const enabledButton = () => {
-        const minimumPassword = 8;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         const minimumUsername = 3;
   
-        if (username.length >= minimumUsername && password.length >= minimumPassword) {
+        if (username.length >= minimumUsername && password.match(passwordRegex)) {
           setIsDisabled(false);
         } else {
           setIsDisabled(true);
@@ -49,9 +50,8 @@ function Register() {
           setRegisterSuccesfull(false);
       }
       
-      if(status === 200) {
-          localStorage.setItem('token', data.token);
-          navigate("/home");
+      if(status === 201) {
+          navigate("/");
       }
   }
 
@@ -91,7 +91,7 @@ function Register() {
           <FloatingLabel
             controlId="floatingPassword"
             label="Senha"
-            className="light-color-text mb-5 input-container"
+            className="light-color-text mb-3 input-container"
           >
             <Form.Control
               size="lg"
@@ -102,6 +102,13 @@ function Register() {
               onChange={ handlePasswordChange }
             />
           </FloatingLabel>
+
+          <div className="register-info-container mb-3 light-color-text">
+            <span><AiOutlineInfoCircle /> Seu usuario deve possuir pelo menos 3 caracteres</span>
+            <span><AiOutlineInfoCircle /> Sua senha deve possuir pelo menos 8 caracteres</span>
+            <span><AiOutlineInfoCircle /> Sua senha deve possuir pelo menos um número</span>
+            <span><AiOutlineInfoCircle /> Sua senha deve possuir pelo menos uma letra maiúscula</span>
+          </div>
 
           <div className="btn-container">
             <Button
