@@ -59,7 +59,7 @@ function Register() {
     <div className="register-page">
       <header className="fixed-top header mt-4">
         <div className="ms-5 ps-5 d-flex align-items-center">
-          <img src={ logo } alt="logo-ng" className="logo ms-4" />
+          <img src={ logo } alt="logo-ng" className="logo ms-5" />
         </div>
       </header>
       <div className="left-content mb-5">
