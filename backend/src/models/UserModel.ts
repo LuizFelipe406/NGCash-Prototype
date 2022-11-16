@@ -1,7 +1,6 @@
 import Account from "../database/models/Account";
 import User from "../database/models/User";
 import sequelize from "../database/models";
-import Transaction from "../database/models/Transaction";
 
 export default class UserModel {
   async create(username: string, password: string): Promise<User> {
@@ -33,10 +32,9 @@ export default class UserModel {
     const user = await User.findOne({
       where: { id },
       include: [
-        { model: Account, as: 'account'},
-        { model: Transaction, as: 'debitedAccount' },
-        { model: Transaction, as: 'creditedAccount' }
-      ]
+        { model: Account, as: 'account'}
+      ],
+      attributes: { exclude: ['password'] }
     });
 
     return user;

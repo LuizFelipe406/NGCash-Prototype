@@ -38,8 +38,9 @@ module.exports = {
         allowNull: false,
       },
       createdAt: {
-        type: Sequelize.DATE,
+        field: 'created_at',
         allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },

@@ -30,8 +30,7 @@ export default class TransactionModel {
           {
             debitedAccountId,
             creditedAccountId,
-            value,
-            createdAt: new Date(Date.now()).toISOString(),
+            value
           },
           { transaction: t }
         );
@@ -58,8 +57,8 @@ export default class TransactionModel {
       where: {
         [Op.and]: [
           { [Op.or]: type },
-          { createdAt: sequelize.where(sequelize.fn("month", sequelize.col('createdAt')), month) },
-          { createdAt: sequelize.where(sequelize.fn("year", sequelize.col('createdAt')), year) }
+          { createdAt: sequelize.where(sequelize.fn("month", sequelize.col('created_at')), month) },
+          { createdAt: sequelize.where(sequelize.fn("year", sequelize.col('created_at')), year) }
         ]
       }
     });

@@ -20,7 +20,7 @@ export default class TransactionService {
       creditedUsername
     );
     const debitedUser = await this.userModel.getUserById(userId);
-    if (!creditedUser || !debitedUser) throw new Error();
+    if (!creditedUser || !debitedUser) throw new CustomError("user not found", 400);
 
     const error = await this.validations(creditedUser, debitedUser, value);
     if (error) throw new CustomError(error.message, error.status);
@@ -38,6 +38,8 @@ export default class TransactionService {
     debitedUser: User,
     value: number
   ): Promise<CustomErrorParams | null> {
+    if (!value) return { status: 400, message: "fields missing" };
+  
     if (creditedUser.id === debitedUser.id)
       return { status: 400, message: "invalid transfer" };
 

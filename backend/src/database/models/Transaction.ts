@@ -20,23 +20,21 @@ Transaction.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  creaditedAccountId: {
+  creditedAccountId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
   value: {
     type: DataTypes.FLOAT,
     allowNull: false,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
   }
 }, {
   underscored: true,
   modelName: 'Transaction',
   tableName: 'Transactions',
-  timestamps: false,
+  timestamps: true,
+  createdAt: true,
+  updatedAt: false,
   sequelize: sequelize,
 });
 

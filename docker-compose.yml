@@ -1,19 +1,19 @@
 version: '3.9'
 services:
-  frontend:
-    container_name: ngcash_frontend
-    build: ./frontend
-    ports:
-      - 3000:3000
-    platform: linux/x86_64
-    working_dir: /app-frontend
-    depends_on:
-      backend:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
-      timeout: 10s
-      retries: 5
+  # frontend:
+  #   container_name: ngcash_frontend
+  #   build: ./frontend
+  #   ports:
+  #     - 3000:3000
+  #   platform: linux/x86_64
+  #   working_dir: /app-frontend
+  #   depends_on:
+  #     backend:
+  #       condition: service_healthy
+  #   healthcheck:
+  #     test: ["CMD", "lsof", "-t", "-i:3000"]
+  #     timeout: 10s
+  #     retries: 5
   backend:
     container_name: ngcash_backend
     build: ./backend
@@ -30,7 +30,7 @@ services:
       - DB_USER=root
       - DB_PASS=123456
       - DB_HOST=db
-      - DB_PORT=3306
+      - DB_PORT=5432
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
@@ -40,7 +40,7 @@ services:
     container_name: ngcash_db
     platform: linux/x86_64
     ports:
-      - 3002:3306
+      - 3002:5432
     environment:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_USER=root
