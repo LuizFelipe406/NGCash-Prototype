@@ -60,7 +60,7 @@
   width: 80%;
 }
 
-.form-control:focus {
+.input:focus {
   background-color: #3D404A;
   color: #FBFDFF;
   border: 2px solid #28527a;

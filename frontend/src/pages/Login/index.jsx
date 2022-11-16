@@ -58,9 +58,7 @@ function Login() {
   return(
     <div className="login-page">
       <header className="fixed-top header mt-4">
-        <div className="ms-5 ps-5 d-flex align-items-center">
-          <img src={ logo } alt="logo-ng" className="logo ms-5" />
-        </div>
+        <img src={ logo } alt="logo-ng" className="logo ms-5" />
       </header>
       <div className="left-content mb-5">
         <h4 className="left-subtitle ms-5 ps-2">PARA TODAS AS IDADES</h4>

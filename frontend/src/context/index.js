@@ -7,7 +7,10 @@ export default Context;
 
 export function ContextProvider({ children }) {
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    account: { balance: 0 },
+    username: ''
+  });
   
   useEffect(() => {
     const storageToken = localStorage.getItem('token');
@@ -24,9 +27,20 @@ export function ContextProvider({ children }) {
     getUserData();
   }, [token])
 
+  const changeBalance = (value) => {
+    setUser((oldUser) => ({
+      ...oldUser,
+      account: {
+        id: oldUser.account.id,
+        balance: oldUser.account.balance - value,
+      }
+    }))
+  }
+
   const contextValue = {
     user,
-    token
+    token,
+    changeBalance
   }
 
   return(
