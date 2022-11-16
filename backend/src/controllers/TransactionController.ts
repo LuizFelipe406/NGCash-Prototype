@@ -50,7 +50,7 @@ export default class TransactionController {
           month,
           year
         );
-      return transactions;
+      res.status(200).json(transactions);
     } catch (error) {
       next(error);
     }

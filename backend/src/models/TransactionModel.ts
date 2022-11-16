@@ -57,8 +57,8 @@ export default class TransactionModel {
       where: {
         [Op.and]: [
           { [Op.or]: type },
-          { createdAt: sequelize.where(sequelize.fn("month", sequelize.col('created_at')), month) },
-          { createdAt: sequelize.where(sequelize.fn("year", sequelize.col('created_at')), year) }
+          { createdAt: sequelize.where(sequelize.fn("date_part", "month", sequelize.col('created_at')), month) },
+          { createdAt: sequelize.where(sequelize.fn("date_part", "year", sequelize.col('created_at')), year) }
         ]
       }
     });
