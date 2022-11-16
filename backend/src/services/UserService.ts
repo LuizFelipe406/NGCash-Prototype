@@ -53,4 +53,11 @@ export default class UserService {
     if (user) return { status: 400, message: "username already used" };
     return undefined;
   }
+
+  async getUserById(id: number): Promise<User> {
+    const user = await this.userModel.getUserById(id);
+    if (!user) throw new Error();
+
+    return user;
+  }
 }
