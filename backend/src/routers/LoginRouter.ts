@@ -13,6 +13,6 @@ export default class UserRouter {
   }
 
   private configRoutes() {
-    this.router.get('/', (req, res, next) => this.loginController.login(req, res, next));
+    this.router.post('/', (req, res, next) => this.loginController.login(req, res, next));
   }
 }
