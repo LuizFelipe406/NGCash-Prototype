@@ -2,7 +2,7 @@ import UserModel from "../models/UserModel";
 import bcrypt = require("bcryptjs");
 import CustomError, { CustomErrorParams } from "../utils/CustomError";
 import userSchema from "../utils/joi/userSchema";
-import User from "../database/models/Users";
+import User from "../database/models/User";
 
 export default class UserService {
   private userModel: UserModel;

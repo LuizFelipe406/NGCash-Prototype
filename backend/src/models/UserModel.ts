@@ -1,5 +1,5 @@
 import Account from "../database/models/Account";
-import User from "../database/models/Users";
+import User from "../database/models/User";
 import sequelize from "../database/models";
 
 export default class UserModel {

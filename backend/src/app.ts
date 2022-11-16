@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import ErrorMiddleware from './middlewares/ErrorMiddleware';
-import { userRouter } from './routers';
+import { userRouter, loginRouter } from './routers';
 
 export default class App {
   public app: express.Express;
@@ -12,11 +12,7 @@ export default class App {
 
     this.config();
 
-    this.app.get('/', (req, res) => res.json({ ok: true }));
-
-    this.app.use('/user', userRouter.router);
-
-    this.app.use(ErrorMiddleware.handle)
+    this.configRoutes();
   }
 
   private config():void {
@@ -24,6 +20,16 @@ export default class App {
     this.app.use(cors({
       origin: process.env.FRONTEND_URL || 'http://localhost:3000'
     }))
+  }
+
+  private configRoutes(): void {
+    this.app.get('/', (req, res) => res.json({ ok: true }));
+
+    this.app.use('/user', userRouter.router);
+
+    this.app.use('/login', loginRouter.router);
+
+    this.app.use(ErrorMiddleware.handle)
   }
 
   public start(PORT: string): void {
