@@ -1,7 +1,7 @@
 .home-container {
   align-items: center;
   display: flex;
-  background-color: #181818;
+  background-color: black;
   height: 100vh;
   width: 100vw;
 }
@@ -19,7 +19,7 @@
 
 .wallet-container {
   margin-left: 10vw;
-  width: 19%;
+  width: 21%;
   font-family: 'IBM Plex Mono', monospace;
 }
 
@@ -101,4 +101,17 @@ input[type=number]::-webkit-outer-spin-button {
   justify-content: center;
   width: 100%;
   margin: auto;
+}
+
+.btn-wallet {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  width: 40%;
+}
+
+.btn-wallet:hover {
+  background-color: white;
+  border: none;
+  color: black;
+  width: 40%;
 }

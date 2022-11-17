@@ -33,6 +33,7 @@ function Home() {
   const clearInputs = () => {
     setUsername('');
     setValue('');
+    setUsernameInvalid(false);
   }
 
   const transfer = async () => {
@@ -41,7 +42,6 @@ function Home() {
     if (status === 200) {
       changeBalance(value);
       clearInputs();
-      setUsernameInvalid(false)
     }
 
     if (status === 400) {
@@ -66,7 +66,7 @@ function Home() {
           <span className="ms-3">saldo disponível</span>
           <span className="me-3">{`R$ ${user.account.balance.toFixed(2)}`}</span>
         </div>
-        <h1>tranferência <AiOutlineArrowLeft/></h1>
+        <h1>transferência <AiOutlineArrowLeft/></h1>
         <Form>
           <Form.Control
             className="user-input mb-3"
@@ -76,7 +76,7 @@ function Home() {
             placeholder="Usuario"
             onChange={ handleUsernameChange }
           />
-          <div className="white-box value-input-container">
+          <div className="white-box value-input-container mb-4">
             <span>R$</span>
             <Form.Control
               className="value-input"
@@ -90,13 +90,17 @@ function Home() {
           <div className="btn-container">
             <Button
               type="button"
+              variant="light"
+              className="white-box btn-wallet me-2"
               onClick={ clearInputs }
             >
               Cancelar
             </Button>
             <Button
               type="button"
+              variant="light"
               onClick={ transfer }
+              className="white-box btn-wallet ms-2"
               disabled={ valueValid && usernameInvalid }
             >
               Transferir
