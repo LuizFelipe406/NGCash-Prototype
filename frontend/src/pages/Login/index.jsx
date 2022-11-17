@@ -79,7 +79,7 @@ function Login() {
               value={ username }
               type="text"
               placeholder="Usuario"
-              className="input"
+              className="input-login"
               onChange={ handleUsernameChange }
             />
           </FloatingLabel>
@@ -92,7 +92,7 @@ function Login() {
             <Form.Control
               size="lg"
               type="password"
-              className="input"
+              className="input-login"
               placeholder="Senha"
               value={ password }
               onChange={ handlePasswordChange }

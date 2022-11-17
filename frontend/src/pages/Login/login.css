@@ -50,7 +50,7 @@
   border-radius: 20px;
 }
 
-.input {
+.input-login {
   border: none;
   background-color: #323745;
   color: #FBFDFF;
@@ -63,7 +63,7 @@
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.input:focus {
+.input-login:focus {
   background-color: #3D404A;
   color: #FBFDFF;
   border: 2px solid #28527a;
