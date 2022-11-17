@@ -1,5 +1,6 @@
 .home-container {
   align-items: center;
+  justify-content: space-around;
   display: flex;
   background-color: black;
   height: 100vh;
@@ -18,7 +19,6 @@
 }
 
 .wallet-container {
-  margin-left: 10vw;
   width: 21%;
   font-family: 'IBM Plex Mono', monospace;
 }

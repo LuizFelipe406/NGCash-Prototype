@@ -5,7 +5,7 @@ import Context from "../../context";
 import requestApi from '../../utils/requestApi';
 
 function WalletTransfer() {
-  const { user, token, changeBalance } = useContext(Context);
+  const { user, token, changeBalance, addTransaction } = useContext(Context);
   const [username, setUsername] = useState('');
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [value, setValue] = useState('');
@@ -36,11 +36,12 @@ function WalletTransfer() {
   }
 
   const transfer = async () => {
-    const { status } = await requestApi('POST', 'transaction', { username, value: Number(value) }, { authorization: token });
+    const { status, data } = await requestApi('POST', 'transaction', { username, value: Number(value) }, { authorization: token });
     
     if (status === 200) {
       changeBalance(value);
       clearInputs();
+      addTransaction(data);
     }
 
     if (status === 400) {
@@ -68,7 +69,6 @@ function WalletTransfer() {
             className="value-input ms-1"
             size="lg"
             value={value}
-            isInvalid={ isDisabled }
             type="number"
             placeholder="0.00"
             onChange={handleValueChange}

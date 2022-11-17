@@ -11,6 +11,7 @@ export function ContextProvider({ children }) {
     account: { balance: 0 },
     username: ''
   });
+  const [transactions, setTransactions] = useState([]);
   
   useEffect(() => {
     const storageToken = localStorage.getItem('token');
@@ -27,6 +28,16 @@ export function ContextProvider({ children }) {
     getUserData();
   }, [token])
 
+  useEffect(() => {
+    const getTransactions = async () => {
+      if (token) {
+        const { data } = await requestApi('GET', 'transaction', {}, { authorization: token });
+        setTransactions(data);
+      }
+    }
+    getTransactions();
+  }, [token])
+
   const changeBalance = (value) => {
     setUser((oldUser) => ({
       ...oldUser,
@@ -37,10 +48,18 @@ export function ContextProvider({ children }) {
     }))
   }
 
+  const addTransaction = (value) => {
+    setTransactions((oldTransactions) => {
+      return [...oldTransactions, value];
+    })
+  }
+
   const contextValue = {
     user,
     token,
-    changeBalance
+    changeBalance,
+    transactions,
+    addTransaction
   }
 
   return(

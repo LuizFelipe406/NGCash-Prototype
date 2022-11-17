@@ -1,0 +1,37 @@
+.table-title {
+  font-family: 'IBM Plex Mono', monospace;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid white;
+  width: 100%;
+  margin: auto 0px;
+}
+
+.table-container {
+  width: fit-content;
+}
+
+.green-text {
+  color: #85BB65;
+}
+
+.table {
+  width: 100%;
+  margin: auto 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  max-height: 50vh;
+}
+
+tr {
+  height: 0.5vh;
+  padding: 0;
+  margin: 0;
+}
+
+th {
+  background-color: black;
+  color: #FBFDFF;
+  font-size: 1.4em;
+  width: fit-content;
+  padding: 0;
+  margin: 0;
+}

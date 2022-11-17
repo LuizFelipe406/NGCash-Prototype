@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../images/logo-ngcash-branco.svg";
 import WalletInfo from "./walletInfo";
 import WalletTransfer from "./walletTransfer";
+import TransactionHistory from "./transactionHistory";
 import "./home.css";
 
 function Home() {
@@ -16,6 +17,7 @@ function Home() {
         <WalletInfo />
         <WalletTransfer />
       </div>
+      <TransactionHistory />
     </div>
   );
 }
