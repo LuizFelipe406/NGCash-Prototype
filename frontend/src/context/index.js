@@ -19,16 +19,6 @@ export function ContextProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const getUserData = async () => {
-      if (token) {
-        const { data } = await requestApi('GET', 'user', {}, { authorization: token });
-        setUser(data);
-      }
-    }
-    getUserData();
-  }, [token])
-
-  useEffect(() => {
     const getTransactions = async () => {
       if (token) {
         const { data } = await requestApi('GET', 'transaction', {}, { authorization: token });
@@ -37,6 +27,13 @@ export function ContextProvider({ children }) {
     }
     getTransactions();
   }, [token])
+
+  const getUserData = async () => {
+    if (token) {
+      const { data } = await requestApi('GET', 'user', {}, { authorization: token });
+      setUser(data);
+    }
+  }
 
   const changeBalance = (value) => {
     setUser((oldUser) => ({
@@ -56,6 +53,7 @@ export function ContextProvider({ children }) {
 
   const contextValue = {
     user,
+    getUserData,
     token,
     changeBalance,
     transactions,

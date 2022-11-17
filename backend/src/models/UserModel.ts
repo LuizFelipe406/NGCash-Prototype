@@ -39,4 +39,14 @@ export default class UserModel {
 
     return user;
   }
+
+  async getUsernameByAccountId(id: number): Promise<string | undefined> {
+    const user = await User.findOne({
+      where: { accountId: id }
+    });
+    if (user) {
+      return user.username;
+    }
+    return undefined
+  }
 }

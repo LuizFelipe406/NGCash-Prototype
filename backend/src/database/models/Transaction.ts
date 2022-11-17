@@ -5,7 +5,7 @@ import sequelize from './index';
 class Transaction extends Model {
   declare id: number;
   declare debitedAccountId: number;
-  declare creaditedAccountId: number;
+  declare creditedAccountId: number;
   declare value: number;
   declare createdAt: Date;
 }

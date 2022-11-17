@@ -66,6 +66,25 @@ export default class TransactionService {
     const transactions = await this.transactionModel.getTransactions(
       user.accountId
     );
+
+    if (transactions) {
+      const transactionsWithUsername = await Promise.all(transactions.map(async (transaction) => {
+        const debitedUsername = await this.userModel.getUsernameByAccountId(transaction.debitedAccountId);
+        const creditedUsername = await this.userModel.getUsernameByAccountId(transaction.creditedAccountId);
+
+        return {
+          id: transaction.id,
+          creditedAccountId: transaction.creditedAccountId,
+          debitedAccountId: transaction.debitedAccountId,
+          value: transaction.value,
+          createdAt: transaction.createdAt,
+          creditedUsername,
+          debitedUsername
+        };
+      }))
+      return transactionsWithUsername;
+    }
+
     return transactions;
   }
 

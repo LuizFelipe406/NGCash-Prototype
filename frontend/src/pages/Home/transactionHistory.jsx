@@ -14,13 +14,15 @@ function TransactionHistory() {
       </h1>
       <table className="table">
         <tbody>
-          {transactions.map((transaction) => {
+          {transactions && transactions.map((transaction) => {
             const date = new Date(transaction.createdAt);
             const isDebit = transaction.debitedAccountId === user.accountId;
+            console.log(transaction);
             return (
               <tr key={transaction.id}>
                 <th>{isDebit ? <BsBagDashFill /> : <BsFillBagPlusFill />}</th>
                 <th>{isDebit ? "cash-out" : "cash-in"}</th>
+                <th>{isDebit ? `para ${transaction.creditedUsername}` : `de ${transaction.debitedUsername}`}</th>
                 <th
                   className={isDebit ? "text-danger" : "green-text"}
                 >{`R$ ${transaction.value.toFixed(2)}`}</th>

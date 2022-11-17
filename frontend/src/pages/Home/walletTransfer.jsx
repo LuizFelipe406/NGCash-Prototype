@@ -12,12 +12,12 @@ function WalletTransfer() {
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
-    if (Number(value) > Number(user.account.balance)) {
+    if (user && (Number(value) > Number(user.account.balance))) {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
     }
-  }, [user.account.balance, value])
+  }, [user, value])
 
   const handleUsernameChange = ({ target }) => {
     const { value } = target;
@@ -40,8 +40,12 @@ function WalletTransfer() {
     
     if (status === 200) {
       changeBalance(value);
+      addTransaction({
+        ...data,
+        debitedUsername: user.username,
+        creditedUsername: username,
+      });
       clearInputs();
-      addTransaction(data);
     }
 
     if (status === 400) {

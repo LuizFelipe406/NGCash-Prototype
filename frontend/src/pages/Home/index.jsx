@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import logo from "../../images/logo-ngcash-branco.svg";
 import WalletInfo from "./walletInfo";
 import WalletTransfer from "./walletTransfer";
 import TransactionHistory from "./transactionHistory";
+import Context from "../../context";
 import "./home.css";
 
 function Home() {
+  const { getUserData } = useContext(Context);
+
+  useEffect(() => {
+    getUserData();
+  }, [])
+
   return (
     <div className="home-container">
       <header className="fixed-top header mt-4">

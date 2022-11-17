@@ -56,7 +56,7 @@ export default class UserService {
 
   async getUserById(id: number): Promise<User> {
     const user = await this.userModel.getUserById(id);
-    if (!user) throw new Error("user not found");
+    if (!user) throw new CustomError("user not found", 404);
 
     return user;
   }
