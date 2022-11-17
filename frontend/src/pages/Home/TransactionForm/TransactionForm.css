@@ -1,0 +1,57 @@
+.transaction-username-input {
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+  border-radius: 1em;
+  width: 100%;
+  padding: 0.4em;
+  padding-left: 1em;
+}
+
+.transaction-value-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+  height: 8vh;
+}
+
+.transaction-value-input {
+  border: none;
+  width: 37%;
+  font-size: 1em;
+  outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+.transaction-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+}
+
+.transaction-btn {
+  height: 5vh;
+  width: 40%;
+}
+
+.transaction-btn:hover {
+  background-color: rgb(221, 221, 221);
+  border: none;
+  color: black;
+}
+
+.transaction-btn:disabled {
+  background-color: #000;
+  color: white;
+  border: 1px solid white;
+}

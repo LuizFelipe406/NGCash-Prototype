@@ -1,44 +1,17 @@
-.login-page {
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  background-color: #000;
-}
-
-.header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 5em;
-}
-
-.light-color-text {
-  color: #FBFDFF;
-}
-
-.left-content {
+.login-form-container {
   width: 30%;
   margin-left: 5vw;
 }
 
 .left-title {
-  font-weight: 500;
   font-size: 3.5em;
   text-align: start;
-  font-family: 'IBM Plex Mono', monospace;
 }
 
 .left-subtitle {
   color: #5a5c64;
   text-align: start;
   font-size: 1.2em;
-  font-family: 'IBM Plex Mono', monospace;
 }
 
 .form-container {
@@ -50,7 +23,11 @@
   border-radius: 20px;
 }
 
-.input-login {
+.login-input-container {
+  width: 80%;
+}
+
+.login-input {
   border: none;
   background-color: #323745;
   color: #FBFDFF;
@@ -58,9 +35,11 @@
   width: 100%;
 }
 
-.input-container {
+.login-btn-container {
   width: 80%;
-  font-family: 'IBM Plex Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .btn {
@@ -69,40 +48,33 @@
   border-radius: 35px;
   font-weight: 500;
   font-size: 1.1em;
-  font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.btn-container {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.login-btn {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
 }
 
-.btn-login:disabled {
+.login-btn:disabled {
   background-color: #000;
   color: white;
   border: 1px solid white;
 }
 
-.btn-login {
+
+.login-btn:hover {
   background-color: white;
   color: black;
   border: 1px solid black;
 }
 
-.btn-login:hover {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-}
-
-.btn-create-account {
+.create-account-btn {
   background-color: #555C69;
   border: none;
 }
 
-.btn-create-account:hover {
+.create-account-btn:hover {
   background-color: #484f5a;
   border: none;
 }

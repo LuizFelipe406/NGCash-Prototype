@@ -54,30 +54,33 @@ function Login() {
   }
 
   return(
-    <div className="login-page">
+    <div className="default-page">
       <header className="fixed-top header mt-4">
-        <img src={ logo } alt="logo-ng" className="logo ms-5" />
+        <div className="ms-5 ps-5 d-flex align-items-center">
+          <img src={ logo } alt="logo-ng" className="logo ms-5" />
+        </div >
       </header>
-      <div className="left-content mb-5">
-        <h4 className="left-subtitle ms-5 ps-2">PARA TODAS AS IDADES</h4>
+      <div className="login-form-container mb-5">
+        <h4 className="left-subtitle title ms-5 ps-2">PARA TODAS AS IDADES</h4>
         <h1
-          className="left-title light-color-text ms-4 ps-4 mt-3 mb-4"
+          className="left-title title light-color-text ms-4 ps-4 mt-3 mb-4"
         >
           A CARTEIRA DA NOVA GERAÇÃO.
         </h1>
-        <h4 className="left-subtitle ms-5 ps-2 mb-5 pb-4">Digite seu Usuario e Senha</h4>
+        <h4 className="left-subtitle title ms-5 ps-2 mb-5 pb-4">Digite seu Usuario e Senha</h4>
         <Form className="form-container">
           <FloatingLabel
             controlId="floatingInput"
             label="Usuario"
-            className="mb-3 light-color-text input-container"
+            className="mb-3 light-color-text login-input-container text"
           >
             <Form.Control
               size="lg"
               value={ username }
               type="text"
               placeholder="Usuario"
-              className="input-login"
+              className="login-input"
+              isInvalid={ !LoginSuccesfull }
               onChange={ handleUsernameChange }
             />
           </FloatingLabel>
@@ -85,25 +88,26 @@ function Login() {
           <FloatingLabel
             controlId="floatingPassword"
             label="Senha"
-            className="light-color-text mb-3 input-container"
+            className="light-color-text mb-3 login-input-container text"
           >
             <Form.Control
               size="lg"
               type="password"
-              className="input-login"
+              className="login-input"
               placeholder="Senha"
               value={ password }
+              isInvalid={ !LoginSuccesfull }
               onChange={ handlePasswordChange }
             />
           </FloatingLabel>
 
           { LoginSuccesfull === false && <span className="text-danger mb-3">Usuário ou Senha incorretos</span> }
 
-          <div className="btn-container">
+          <div className="login-btn-container">
             <Button
               size="md"
               type="button"
-              className="btn btn-create-account light-color-text"
+              className="text btn create-account-btn light-color-text"
               onClick={() => navigate('/register')}
             >
               Cadastrar
@@ -111,7 +115,7 @@ function Login() {
             <Button
               size="md"
               type="button"
-              className="btn btn-login"
+              className="text btn login-btn"
               disabled={ isDisabled }
               onClick={ login }
             >

@@ -1,0 +1,17 @@
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  width: 100%;
+  height: 15vh;
+}
+
+.wallet-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4em 0;
+  background-color: #383838;
+  border-radius: 2em;
+}

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import logo from "../../images/logo-ngcash-branco.svg";
-import WalletInfo from "./walletInfo";
-import WalletTransfer from "./walletTransfer";
-import TransactionHistory from "./transactionHistory";
+import UserInfo from "./UserInfo";
+import TransactionForm from "./TransactionForm";
+import TransactionHistory from "./TransactionHistory";
 import Context from "../../context";
 import "./home.css";
 
@@ -14,15 +14,15 @@ function Home() {
   }, [getToken])
 
   return (
-    <div className="home-container">
-      <header className="fixed-top header mt-4">
+    <div className="home-container default-page">
+      <header className="fixed-top header header-home mt-4">
         <div className="d-flex align-items-center justify-content-center">
           <img src={logo} alt="logo-ng" className="logo ms-5" />
         </div>
       </header>
-      <div className="light-color-text wallet-container">
-        <WalletInfo />
-        <WalletTransfer />
+      <div className="light-color-text left-content-container">
+        <UserInfo />
+        <TransactionForm />
       </div>
       <TransactionHistory />
     </div>

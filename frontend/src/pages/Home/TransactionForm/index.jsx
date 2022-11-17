@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Context from "../../context";
-import requestApi from '../../utils/requestApi';
+import Context from "../../../context";
+import requestApi from '../../../utils/requestApi';
+import './TransactionForm.css';
 
-function WalletTransfer() {
+function TransactionForm() {
   const { user, token, changeBalance, addTransaction } = useContext(Context);
   const [username, setUsername] = useState('');
   const [usernameInvalid, setUsernameInvalid] = useState(false);
@@ -55,22 +56,22 @@ function WalletTransfer() {
 
   return (
     <div>
-      <h1>
+      <h1 className="title">
         transferência <AiOutlineArrowLeft />
       </h1>
       <Form>
         <Form.Control
-          className="user-input mb-3"
+          className="transaction-username-input text mb-3"
           value={username}
           type="text"
           isInvalid={ usernameInvalid }
           placeholder="Usuario"
           onChange={handleUsernameChange}
         />
-        <div className="white-box value-input-container mb-4">
+        <div className="white-box text transaction-value-container mb-4">
           <span>R$</span>
           <input
-            className="value-input ms-1"
+            className="transaction-value-input text ms-1"
             size="lg"
             value={value}
             type="number"
@@ -78,11 +79,11 @@ function WalletTransfer() {
             onChange={handleValueChange}
           />
         </div>
-        <div className="btn-container-wallet">
+        <div className="transaction-btn-container">
           <button
             type="button"
             variant="light"
-            className="white-box btn-wallet me-2"
+            className="white-box text transaction-btn me-2"
             onClick={clearInputs}
           >
             Cancelar
@@ -90,7 +91,7 @@ function WalletTransfer() {
           <button
             type="button"
             onClick={transfer}
-            className="white-box btn-wallet ms-2"
+            className="white-box text transaction-btn ms-2"
             disabled={ isDisabled }
           >
             Transferir
@@ -102,4 +103,4 @@ function WalletTransfer() {
 }
 
 
-export default WalletTransfer;
+export default TransactionForm;

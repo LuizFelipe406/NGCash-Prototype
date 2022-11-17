@@ -11,8 +11,9 @@ import "./register.css";
 
 function Register() {
   const [username, setUsername] = useState('')
+  const [usernameValid, setUsernameValid] = useState('');
   const [password, setPassword] = useState('');
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [passwordValid, setPasswordValid] = useState('');
   const [registerSuccesfull, setRegisterSuccesfull] = useState('did not try yet');
   const navigate = useNavigate();
 
@@ -20,11 +21,16 @@ function Register() {
       const enabledButton = () => {
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         const minimumUsername = 3;
-  
-        if (username.length >= minimumUsername && password.match(passwordRegex)) {
-          setIsDisabled(false);
+        if (username.length >= minimumUsername) {
+          setUsernameValid(true);
         } else {
-          setIsDisabled(true);
+          setUsernameValid(false);
+        }
+
+        if (password.match(passwordRegex)) {
+          setPasswordValid(true);
+        } else {
+          setPasswordValid(false);
         }
       };
   
@@ -56,32 +62,34 @@ function Register() {
   }
 
   return(
-    <div className="register-page">
+    <div className="default-page">
       <header className="fixed-top header mt-4">
         <div className="ms-5 ps-5 d-flex align-items-center">
           <img src={ logo } alt="logo-ng" className="logo ms-5" />
         </div>
       </header>
-      <div className="left-content mb-5">
-        <h4 className="left-subtitle ms-5 ps-2">PARA TODAS AS IDADES</h4>
+      <div className="login-form-container mb-5">
+        <h4 className="left-subtitle title ms-5 ps-2">PARA TODAS AS IDADES</h4>
         <h1
-          className="left-title light-color-text ms-4 ps-4 mt-3 mb-4"
+          className="left-title title light-color-text ms-4 ps-4 mt-3 mb-4"
         >
           A CARTEIRA DA NOVA GERAÇÃO.
         </h1>
-        <h4 className="left-subtitle ms-5 ps-2 mb-5">Digite um Usuario e Senha</h4>
+        <h4 className="left-subtitle title ms-5 ps-2 mb-5">Digite um Usuario e Senha</h4>
         <Form className="form-container">
           <FloatingLabel
             controlId="floatingInput"
             label="Usuario"
-            className="mb-3 light-color-text input-container"
+            className="mb-3 light-color-text login-input-container"
           >
             <Form.Control
               size="lg"
               value={ username }
               type="text"
               placeholder="Usuario"
-              className="input"
+              isInvalid={ !usernameValid }
+              isValid= { usernameValid }
+              className="login-input"
               onChange={ handleUsernameChange }
             />
           </FloatingLabel>
@@ -91,13 +99,15 @@ function Register() {
           <FloatingLabel
             controlId="floatingPassword"
             label="Senha"
-            className="light-color-text mb-3 input-container"
+            className="light-color-text mb-3 login-input-container"
           >
             <Form.Control
               size="lg"
               type="password"
-              className="input"
+              className="login-input"
               placeholder="Senha"
+              isInvalid={ !passwordValid }
+              isValid= { passwordValid }
               value={ password }
               onChange={ handlePasswordChange }
             />
@@ -110,12 +120,12 @@ function Register() {
             <span><AiOutlineInfoCircle /> Sua senha deve possuir pelo menos uma letra maiúscula</span>
           </div>
 
-          <div className="btn-container">
+          <div className="login-btn-container">
             <Button
               size="md"
               type="button"
-              className="btn btn-create"
-              disabled={ isDisabled }
+              className="btn btn-create text"
+              disabled={ !passwordValid && !usernameValid }
               onClick={ register }
             >
               Criar

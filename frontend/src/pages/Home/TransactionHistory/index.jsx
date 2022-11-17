@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { BsFillBagPlusFill, BsBagDashFill } from "react-icons/bs";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import Context from "../../context";
-import "./transaction.css";
+import Context from "../../../context";
+import "./TransactionHistory.css";
 
 function TransactionHistory() {
   const { transactions, user } = useContext(Context);
 
   return (
     <div className="table-container">
-      <h1 className="table-title light-color-text">
+      <h1 className="title table-title light-color-text">
         histórico de transações <AiOutlineArrowDown />
       </h1>
-      <table className="table">
+      <table className="table text">
         <tbody>
           {transactions && transactions.map((transaction) => {
             const date = new Date(transaction.createdAt);
