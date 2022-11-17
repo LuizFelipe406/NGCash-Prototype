@@ -11,9 +11,9 @@ import "./register.css";
 
 function Register() {
   const [username, setUsername] = useState('')
-  const [usernameValid, setUsernameValid] = useState('');
+  const [usernameValid, setUsernameValid] = useState(false);
   const [password, setPassword] = useState('');
-  const [passwordValid, setPasswordValid] = useState('');
+  const [passwordValid, setPasswordValid] = useState(false);
   const [registerSuccesfull, setRegisterSuccesfull] = useState('did not try yet');
   const navigate = useNavigate();
 
@@ -125,7 +125,7 @@ function Register() {
               size="md"
               type="button"
               className="btn btn-create text"
-              disabled={ !passwordValid && !usernameValid }
+              disabled={ (!passwordValid || !usernameValid) }
               onClick={ register }
             >
               Criar
