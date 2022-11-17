@@ -7,11 +7,11 @@ import Context from "../../context";
 import "./home.css";
 
 function Home() {
-  const { getUserData } = useContext(Context);
+  const { getToken } = useContext(Context);
 
   useEffect(() => {
-    getUserData();
-  }, [])
+    getToken();
+  }, [getToken])
 
   return (
     <div className="home-container">

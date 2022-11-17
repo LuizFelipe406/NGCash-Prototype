@@ -17,7 +17,6 @@ function TransactionHistory() {
           {transactions && transactions.map((transaction) => {
             const date = new Date(transaction.createdAt);
             const isDebit = transaction.debitedAccountId === user.accountId;
-            console.log(transaction);
             return (
               <tr key={transaction.id}>
                 <th>{isDebit ? <BsBagDashFill /> : <BsFillBagPlusFill />}</th>
