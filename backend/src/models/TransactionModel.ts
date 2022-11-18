@@ -52,16 +52,14 @@ export default class TransactionModel {
     return transactions;
   }
 
-  async getTransactionsByFilter(type: typeQueryFilter[], endingDate: string, startingDate: string) {
+  async getTransactionsByFilter(type: typeQueryFilter[], day: string | undefined, month: string | undefined, year: string | undefined) {
     const transactions = await Transaction.findAll({
       where: {
         [Op.and]: [
           { [Op.or]: type },
-          { 
-            createdAt: {
-            [Op.lte]: new Date(endingDate),
-            [Op.gte]: new Date(startingDate),
-          } }
+          { createdAt: day ? sequelize.where(sequelize.fn("date_part", "day", sequelize.col('created_at')), Number(day)) : { [Op.not]: null } },
+          { createdAt: month ? sequelize.where(sequelize.fn("date_part", "month", sequelize.col('created_at')), Number(month)) : { [Op.not]: null } },
+          { createdAt: year ? sequelize.where(sequelize.fn("date_part", "year", sequelize.col('created_at')), Number(year)) : { [Op.not]: null } }
         ]
       }
     });

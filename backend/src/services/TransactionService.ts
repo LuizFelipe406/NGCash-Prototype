@@ -52,8 +52,9 @@ export default class TransactionService {
   async getTransactionsByFilter(
     userId: number,
     type: string | undefined,
-    endingDate: string,
-    startingDate: string
+    day: string | undefined,
+    month: string | undefined,
+    year: string | undefined
   ) {
     const user = await this.userModel.getUserById(userId);
     if (!user) throw new CustomError('User not found', 404);
@@ -63,8 +64,9 @@ export default class TransactionService {
 
     const transactions = await this.transactionModel.getTransactionsByFilter(
       typeFilter,
-      endingDate,
-      startingDate
+      day,
+      month,
+      year
     );
 
     if (transactions) {

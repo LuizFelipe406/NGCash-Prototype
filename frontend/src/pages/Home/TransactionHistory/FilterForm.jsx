@@ -36,8 +36,8 @@ function FilterForm() {
   const { updateTransactions, token } = useContext(Context);
   const [type, setType] = useState("both");
   const [day, setDay] = useState("all");
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState("all");
+  const [year, setYear] = useState("all");
 
   const handleTypeChange = ({ target }) => {
     const { value } = target;
@@ -60,15 +60,27 @@ function FilterForm() {
   };
 
   const filter = async () => {
-    let apiUrl = 'transaction/filtered/';
+    let apiUrl = 'transaction/filtered/?';
 
-    apiUrl = apiUrl + `?type=${type}&month=${month}&year=${year}`;
+    apiUrl = apiUrl + `type=${type}`;
 
     if (day !== 'all') {
-      apiUrl = apiUrl + `?day=${day}`;
+      apiUrl = apiUrl + `&day=${day}`;
     }
     
+    if (month !== 'all') {
+      apiUrl = apiUrl + `&month=${month}`;
+    }
+
+    if (year !== 'all') {
+      apiUrl = apiUrl + `&year=${year}`;
+    }
+
+    console.log(apiUrl);
+
     const { data } = await requestApi('GET', apiUrl, {}, { authorization: token });
+
+    console.log(data);
 
     updateTransactions(data);
   };
@@ -112,6 +124,7 @@ function FilterForm() {
               onChange={handleMonthChange}
               className="text filter-select"
             >
+              <option value="all">todos</option>
               {months.map((month) => (
                 <option key={month} value={month + 1}>
                   {monthsString[month]}
@@ -126,6 +139,7 @@ function FilterForm() {
               onChange={handleYearChange}
               className="text filter-select"
             >
+              <option value="all">todos</option>
               {years.map((year) => (
                 <option key={year} value={year}>
                   {year}

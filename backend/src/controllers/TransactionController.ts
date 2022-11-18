@@ -41,14 +41,15 @@ export default class TransactionController {
     try {
       const {
         userId,
-        query: { type, endingDate, startingDate },
+        query: { type, day, month, year },
       } = req;
       const transactions =
         await this.transactionService.getTransactionsByFilter(
           userId,
           type as string | undefined,
-          endingDate as string,
-          startingDate as string,
+          day as string | undefined,
+          month as string | undefined,
+          year as string | undefined
         );
       res.status(200).json(transactions);
     } catch (error) {
