@@ -14,6 +14,7 @@ function TransactionHistory() {
         histórico de transações <AiOutlineArrowDown />
       </h1>
       <FilterForm />
+      <div className="scroll">
       <table className="table text">
         <tbody>
           {transactions && transactions.map((transaction) => {
@@ -39,6 +40,7 @@ function TransactionHistory() {
           })}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

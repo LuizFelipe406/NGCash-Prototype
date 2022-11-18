@@ -1,5 +1,6 @@
 .table-container {
   width: fit-content;
+  height:  66vh;
 }
 
 .table-title {
@@ -15,9 +16,11 @@
 }
 
 .table {
+  display: block;
   width: 100%;
   margin: auto 0;
-  max-height: 50vh;
+  height: 43vh;
+  overflow-y: scroll;
 }
 
 tr {
@@ -33,4 +36,21 @@ th {
   width: fit-content;
   padding: 0;
   margin: 0;
+}
+
+
+.table::-webkit-scrollbar {
+   width: 0.8em;
+   margin: 0;
+   padding: 0;
+}
+
+.table::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3); 
+   border-radius: 10px;
+}
+
+.table::-webkit-scrollbar-thumb {
+   border-radius: 10px;
+   box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5); 
 }
