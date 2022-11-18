@@ -20,12 +20,12 @@ function TransactionForm() {
     }
   }, [user, value])
 
-  const handleUsernameChange = ({ target }) => {
+  const handleUsernameChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setUsername(value);
   };
 
-  const handleValueChange = ({ target }) => {
+  const handleValueChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setValue(value);
   };
@@ -40,7 +40,7 @@ function TransactionForm() {
     const { status, data } = await requestApi('POST', 'transaction', { username, value: Number(value) }, { authorization: token });
     
     if (status === 200) {
-      changeBalance(value);
+      changeBalance(Number(value));
       addTransaction({
         ...data,
         debitedUsername: user.username,
@@ -72,7 +72,6 @@ function TransactionForm() {
           <span>R$</span>
           <input
             className="transaction-value-input text ms-1"
-            size="lg"
             value={value}
             type="number"
             placeholder="0.00"
@@ -82,7 +81,6 @@ function TransactionForm() {
         <div className="transaction-btn-container">
           <button
             type="button"
-            variant="light"
             className="white-box text transaction-btn me-2"
             onClick={clearInputs}
           >

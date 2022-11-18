@@ -4,8 +4,8 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useNavigate } from "react-router-dom";
 import walletApi from "../../utils/requestApi";
-import logo from "../../images/logo-ngcash-branco.svg";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import logo from "../../images/logo-ngcash-branco.svg";
 import "./register.css";
 
 
@@ -14,7 +14,7 @@ function Register() {
   const [usernameValid, setUsernameValid] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
-  const [registerSuccesfull, setRegisterSuccesfull] = useState('did not try yet');
+  const [registerSuccesfull, setRegisterSuccesfull] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -122,7 +122,6 @@ function Register() {
 
           <div className="login-btn-container">
             <Button
-              size="md"
               type="button"
               className="btn btn-create text"
               disabled={ (!passwordValid || !usernameValid) }

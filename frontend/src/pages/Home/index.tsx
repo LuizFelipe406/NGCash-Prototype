@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import logo from "../../images/logo-ngcash-branco.svg";
-import UserInfo from "./UserInfo";
-import TransactionForm from "./TransactionForm";
-import TransactionHistory from "./TransactionHistory";
+import UserInfo from "./UserInfo/index";
+import TransactionForm from "./TransactionForm/index";
+import TransactionHistory from "./TransactionHistory/index";
 import Context from "../../context";
+import logo from "../../images/logo-ngcash-branco.svg";
 import "./home.css";
 
 function Home() {

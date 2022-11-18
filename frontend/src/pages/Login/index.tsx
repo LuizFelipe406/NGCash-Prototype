@@ -12,7 +12,7 @@ function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
-  const [LoginSuccesfull, setLoginSuccesfull] = useState('did not try yet');
+  const [LoginSuccesfull, setLoginSuccesfull] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,12 +30,12 @@ function Login() {
       enabledButton();
     }, [username, password]);
   
-  const handleUsernameChange = ({ target }) => {
+  const handleUsernameChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setUsername(value);
   };
   
-  const handlePasswordChange = ({ target }) => {
+  const handlePasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setPassword(value);
   };
@@ -105,7 +105,6 @@ function Login() {
 
           <div className="login-btn-container">
             <Button
-              size="md"
               type="button"
               className="text btn create-account-btn light-color-text"
               onClick={() => navigate('/register')}
@@ -113,7 +112,6 @@ function Login() {
               Cadastrar
             </Button>
             <Button
-              size="md"
               type="button"
               className="text btn login-btn"
               disabled={ isDisabled }

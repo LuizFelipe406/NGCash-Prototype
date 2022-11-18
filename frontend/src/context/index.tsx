@@ -1,9 +1,35 @@
 import React, { createContext, useState, useEffect, PropsWithChildren } from "react";
+import IContext from "../interfaces/IContext";
 import ITransaction from "../interfaces/ITransaction";
 import IUser from "../interfaces/IUser";
 import requestApi from '../utils/requestApi';
 
-const Context = createContext({});
+const defaultContext: IContext = {
+  user: {
+    username: '',
+    accountId: 0,
+    account: {
+      id: 0,
+      balance: 0
+    }
+  },
+  getToken: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  token: "",
+  changeBalance: function (value: number): void {
+    throw new Error("Function not implemented.");
+  },
+  transactions: [],
+  addTransaction: function (value: ITransaction): void {
+    throw new Error("Function not implemented.");
+  },
+  updateTransactions: function (value: ITransaction[]): void {
+    throw new Error("Function not implemented.");
+  }
+}
+
+const Context = createContext<IContext>(defaultContext);
 
 export default Context;
 

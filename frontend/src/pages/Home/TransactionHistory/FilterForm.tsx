@@ -6,7 +6,7 @@ import Context from '../../../context';
 import requestApi from '../../../utils/requestApi';
 import "./FilterForm.css";
 
-let days = [];
+const days: number[] = [];
 let monthsString = [
   "Jan",
   "Feb",
@@ -21,7 +21,7 @@ let monthsString = [
   "Nov",
   "Dec",
 ];
-let months = [];
+let months: number[] = [];
 let years = ["2022", "2023"];
 
 for (let i = 1; i <= 31; i++) {
@@ -39,22 +39,22 @@ function FilterForm() {
   const [month, setMonth] = useState("all");
   const [year, setYear] = useState("all");
 
-  const handleTypeChange = ({ target }) => {
+  const handleTypeChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setType(value);
   };
 
-  const handleDayChange = ({ target }) => {
+  const handleDayChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setDay(value);
   };
 
-  const handleMonthChange = ({ target }) => {
+  const handleMonthChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setMonth(value);
   };
 
-  const handleYearChange = ({ target }) => {
+  const handleYearChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setYear(value);
   };
@@ -93,7 +93,7 @@ function FilterForm() {
             <Form.Label className="text">Tipo</Form.Label>
             <Form.Select
               value={type}
-              onChange={handleTypeChange}
+              onChange={ handleTypeChange }
               className="text filter-select"
             >
               <option value="both">ambos</option>
@@ -106,7 +106,7 @@ function FilterForm() {
             <Form.Label className="text">Dia</Form.Label>
             <Form.Select
               value={day}
-              onChange={handleDayChange}
+              onChange={ handleDayChange }
               className="text filter-select"
             >
               <option value="all">todos</option>
@@ -121,7 +121,7 @@ function FilterForm() {
             <Form.Label className="text">Mês</Form.Label>
             <Form.Select
               value={month}
-              onChange={handleMonthChange}
+              onChange={ handleMonthChange }
               className="text filter-select"
             >
               <option value="all">todos</option>
@@ -136,7 +136,7 @@ function FilterForm() {
             <Form.Label className="text">Ano</Form.Label>
             <Form.Select
               value={year}
-              onChange={handleYearChange}
+              onChange={ handleYearChange }
               className="text filter-select"
             >
               <option value="all">todos</option>
