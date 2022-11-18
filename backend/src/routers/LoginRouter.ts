@@ -1,5 +1,5 @@
-import express from 'express';
-import LoginController from '../controllers/LoginController';
+import express from "express";
+import LoginController from "../controllers/LoginController";
 
 export default class UserRouter {
   public router: express.IRouter;
@@ -13,6 +13,8 @@ export default class UserRouter {
   }
 
   private configRoutes() {
-    this.router.post('/', (req, res, next) => this.loginController.login(req, res, next));
+    this.router.post("/", (req, res, next) =>
+      this.loginController.login(req, res, next)
+    );
   }
 }

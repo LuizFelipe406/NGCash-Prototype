@@ -1,6 +1,6 @@
-import express from 'express';
-import UserController from '../controllers/UserController';
-import AuthMiddleware from '../middlewares/AuthMiddleware';
+import express from "express";
+import UserController from "../controllers/UserController";
+import AuthMiddleware from "../middlewares/AuthMiddleware";
 
 export default class UserRouter {
   public router: express.IRouter;
@@ -16,11 +16,12 @@ export default class UserRouter {
   }
 
   private configRoutes() {
-    this.router.post('/', (req, res, next) => this.userController.create(req, res, next));
+    this.router.post("/", (req, res, next) =>
+      this.userController.create(req, res, next)
+    );
 
-    this.router.get('/',
-      this.authMiddleware.validateToken,
-      (req, res, next) => this.userController.getUser(req, res, next),
+    this.router.get("/", this.authMiddleware.validateToken, (req, res, next) =>
+      this.userController.getUser(req, res, next)
     );
   }
 }

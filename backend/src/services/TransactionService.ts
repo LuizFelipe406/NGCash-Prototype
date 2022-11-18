@@ -21,7 +21,8 @@ export default class TransactionService {
       creditedUsername
     );
     const debitedUser = await this.userModel.getUserById(userId);
-    if (!creditedUser || !debitedUser) throw new CustomError("user not found", 400);
+    if (!creditedUser || !debitedUser)
+      throw new CustomError("user not found", 400);
 
     const error = await this.validations(creditedUser, debitedUser, value);
     if (error) throw new CustomError(error.message, error.status);
@@ -57,9 +58,8 @@ export default class TransactionService {
     year: string | undefined
   ) {
     const user = await this.userModel.getUserById(userId);
-    if (!user) throw new CustomError('User not found', 404);
+    if (!user) throw new CustomError("User not found", 404);
 
-   
     const typeFilter = this.getTypeFilter(type, user);
 
     const transactions = await this.transactionModel.getTransactionsByFilter(
@@ -82,7 +82,7 @@ export default class TransactionService {
     value: number
   ): Promise<CustomErrorParams | null> {
     if (!value) return { status: 400, message: "fields missing" };
-  
+
     if (creditedUser.id === debitedUser.id)
       return { status: 400, message: "invalid transfer" };
 
@@ -122,20 +122,26 @@ export default class TransactionService {
   }
 
   private async addUsername(transactions: Transaction[]) {
-    const transactionsWithUsername = await Promise.all(transactions.map(async (transaction) => {
-      const debitedUsername = await this.userModel.getUsernameByAccountId(transaction.debitedAccountId);
-      const creditedUsername = await this.userModel.getUsernameByAccountId(transaction.creditedAccountId);
+    const transactionsWithUsername = await Promise.all(
+      transactions.map(async (transaction) => {
+        const debitedUsername = await this.userModel.getUsernameByAccountId(
+          transaction.debitedAccountId
+        );
+        const creditedUsername = await this.userModel.getUsernameByAccountId(
+          transaction.creditedAccountId
+        );
 
-      return {
-        id: transaction.id,
-        creditedAccountId: transaction.creditedAccountId,
-        debitedAccountId: transaction.debitedAccountId,
-        value: transaction.value,
-        createdAt: transaction.createdAt,
-        creditedUsername,
-        debitedUsername
-      };
-    }))
+        return {
+          id: transaction.id,
+          creditedAccountId: transaction.creditedAccountId,
+          debitedAccountId: transaction.debitedAccountId,
+          value: transaction.value,
+          createdAt: transaction.createdAt,
+          creditedUsername,
+          debitedUsername,
+        };
+      })
+    );
     return transactionsWithUsername;
   }
 }

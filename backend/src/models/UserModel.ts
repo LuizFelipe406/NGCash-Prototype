@@ -31,10 +31,8 @@ export default class UserModel {
   async getUserById(id: number): Promise<User | null> {
     const user = await User.findOne({
       where: { id },
-      include: [
-        { model: Account, as: 'account'}
-      ],
-      attributes: { exclude: ['password'] }
+      include: [{ model: Account, as: "account" }],
+      attributes: { exclude: ["password"] },
     });
 
     return user;
@@ -42,11 +40,11 @@ export default class UserModel {
 
   async getUsernameByAccountId(id: number): Promise<string | undefined> {
     const user = await User.findOne({
-      where: { accountId: id }
+      where: { accountId: id },
     });
     if (user) {
       return user.username;
     }
-    return undefined
+    return undefined;
   }
 }

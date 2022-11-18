@@ -14,7 +14,11 @@ export default class TransactionController {
         userId,
         body: { username, value },
       } = req;
-      const newTransfer = await this.transactionService.transfer(userId, username, value);
+      const newTransfer = await this.transactionService.transfer(
+        userId,
+        username,
+        value
+      );
       res.status(200).json(newTransfer);
     } catch (error) {
       next(error);

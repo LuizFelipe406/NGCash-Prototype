@@ -4,9 +4,9 @@ import Account from "../database/models/Account";
 import Transaction from "../database/models/Transaction";
 
 type typeQueryFilter = {
-  debitedAccountId?: number
-  creditedAccountId?: number
-}
+  debitedAccountId?: number;
+  creditedAccountId?: number;
+};
 
 export default class TransactionModel {
   async transfer(
@@ -30,7 +30,7 @@ export default class TransactionModel {
           {
             debitedAccountId,
             creditedAccountId,
-            value
+            value,
           },
           { transaction: t }
         );
@@ -52,16 +52,50 @@ export default class TransactionModel {
     return transactions;
   }
 
-  async getTransactionsByFilter(type: typeQueryFilter[], day: string | undefined, month: string | undefined, year: string | undefined) {
+  async getTransactionsByFilter(
+    type: typeQueryFilter[],
+    day: string | undefined,
+    month: string | undefined,
+    year: string | undefined
+  ) {
     const transactions = await Transaction.findAll({
       where: {
         [Op.and]: [
           { [Op.or]: type },
-          { createdAt: day ? sequelize.where(sequelize.fn("date_part", "day", sequelize.col('created_at')), Number(day)) : { [Op.not]: null } },
-          { createdAt: month ? sequelize.where(sequelize.fn("date_part", "month", sequelize.col('created_at')), Number(month)) : { [Op.not]: null } },
-          { createdAt: year ? sequelize.where(sequelize.fn("date_part", "year", sequelize.col('created_at')), Number(year)) : { [Op.not]: null } }
-        ]
-      }
+          {
+            createdAt: day
+              ? sequelize.where(
+                  sequelize.fn("date_part", "day", sequelize.col("created_at")),
+                  Number(day)
+                )
+              : { [Op.not]: null },
+          },
+          {
+            createdAt: month
+              ? sequelize.where(
+                  sequelize.fn(
+                    "date_part",
+                    "month",
+                    sequelize.col("created_at")
+                  ),
+                  Number(month)
+                )
+              : { [Op.not]: null },
+          },
+          {
+            createdAt: year
+              ? sequelize.where(
+                  sequelize.fn(
+                    "date_part",
+                    "year",
+                    sequelize.col("created_at")
+                  ),
+                  Number(year)
+                )
+              : { [Op.not]: null },
+          },
+        ],
+      },
     });
     return transactions;
   }
