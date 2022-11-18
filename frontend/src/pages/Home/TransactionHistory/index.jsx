@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { BsFillBagPlusFill, BsBagDashFill } from "react-icons/bs";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import Context from "../../../context";
+import FilterForm from "./FilterForm";
 import "./TransactionHistory.css";
 
 function TransactionHistory() {
@@ -12,6 +13,7 @@ function TransactionHistory() {
       <h1 className="title table-title light-color-text">
         histórico de transações <AiOutlineArrowDown />
       </h1>
+      <FilterForm />
       <table className="table text">
         <tbody>
           {transactions && transactions.map((transaction) => {

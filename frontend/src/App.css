@@ -40,6 +40,14 @@
   box-shadow: rgba(0, 0, 0, 1) 5px 5px, rgba(255, 255, 255, 1) 7px 7px
 }
 
+.black-box {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 1em;
+  box-shadow: rgb(255, 255, 255) 3px 3px, rgb(0, 0, 0) 5px 5px
+}
+
 input.form-control:focus {
   color: white;
   border: 1px solid white;
