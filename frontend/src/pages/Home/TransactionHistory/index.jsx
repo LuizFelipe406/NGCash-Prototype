@@ -7,6 +7,7 @@ import "./TransactionHistory.css";
 
 function TransactionHistory() {
   const { transactions, user } = useContext(Context);
+  console.log(transactions);
 
   return (
     <div className="table-container">

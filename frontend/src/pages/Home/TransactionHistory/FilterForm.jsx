@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Context from '../../../context';
+import requestApi from '../../../utils/requestApi';
 import "./FilterForm.css";
 
 let days = [];
@@ -31,10 +33,11 @@ for (let i = 0; i <= 11; i++) {
 }
 
 function FilterForm() {
+  const { updateTransactions, token } = useContext(Context);
   const [type, setType] = useState("both");
   const [day, setDay] = useState("all");
-  const [month, setMonth] = useState("all");
-  const [year, setYear] = useState("all");
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
 
   const handleTypeChange = ({ target }) => {
     const { value } = target;
@@ -54,6 +57,20 @@ function FilterForm() {
   const handleYearChange = ({ target }) => {
     const { value } = target;
     setYear(value);
+  };
+
+  const filter = async () => {
+    let apiUrl = 'transaction/filtered/';
+
+    apiUrl = apiUrl + `?type=${type}&month=${month}&year=${year}`;
+
+    if (day !== 'all') {
+      apiUrl = apiUrl + `?day=${day}`;
+    }
+    
+    const { data } = await requestApi('GET', apiUrl, {}, { authorization: token });
+
+    updateTransactions(data);
   };
 
   return (
@@ -95,7 +112,6 @@ function FilterForm() {
               onChange={handleMonthChange}
               className="text filter-select"
             >
-              <option value="all">todos</option>
               {months.map((month) => (
                 <option key={month} value={month + 1}>
                   {monthsString[month]}
@@ -110,7 +126,6 @@ function FilterForm() {
               onChange={handleYearChange}
               className="text filter-select"
             >
-              <option value="all">todos</option>
               {years.map((year) => (
                 <option key={year} value={year}>
                   {year}
@@ -119,7 +134,13 @@ function FilterForm() {
             </Form.Select>
           </Form.Group>
           <Col>
-            <button className="black-box mt-4 text filter-btn">Filtrar</button>
+            <button
+              type="button"
+              className="black-box mt-4 text filter-btn"
+              onClick={ filter }
+            >
+              Filtrar
+            </button>
           </Col>
         </Row>
       </Form>

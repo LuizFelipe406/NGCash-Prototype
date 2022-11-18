@@ -1,3 +1,4 @@
+import Transaction from "../database/models/Transaction";
 import User from "../database/models/User";
 import AccountModel from "../models/AccountModel";
 import TransactionModel from "../models/TransactionModel";
@@ -33,6 +34,46 @@ export default class TransactionService {
     return newTransfer;
   }
 
+  async getTransactions(userId: number) {
+    const user = await this.userModel.getUserById(userId);
+    if (!user) throw new Error();
+
+    const transactions = await this.transactionModel.getTransactions(
+      user.accountId
+    );
+
+    if (transactions) {
+      return this.addUsername(transactions);
+    }
+
+    return transactions;
+  }
+
+  async getTransactionsByFilter(
+    userId: number,
+    type: string | undefined,
+    endingDate: string,
+    startingDate: string
+  ) {
+    const user = await this.userModel.getUserById(userId);
+    if (!user) throw new CustomError('User not found', 404);
+
+   
+    const typeFilter = this.getTypeFilter(type, user);
+
+    const transactions = await this.transactionModel.getTransactionsByFilter(
+      typeFilter,
+      endingDate,
+      startingDate
+    );
+
+    if (transactions) {
+      return this.addUsername(transactions);
+    }
+
+    return transactions;
+  }
+
   private async validations(
     creditedUser: User,
     debitedUser: User,
@@ -59,47 +100,7 @@ export default class TransactionService {
     return null;
   }
 
-  async getTransactions(userId: number) {
-    const user = await this.userModel.getUserById(userId);
-    if (!user) throw new Error();
-
-    const transactions = await this.transactionModel.getTransactions(
-      user.accountId
-    );
-
-    if (transactions) {
-      const transactionsWithUsername = await Promise.all(transactions.map(async (transaction) => {
-        const debitedUsername = await this.userModel.getUsernameByAccountId(transaction.debitedAccountId);
-        const creditedUsername = await this.userModel.getUsernameByAccountId(transaction.creditedAccountId);
-
-        return {
-          id: transaction.id,
-          creditedAccountId: transaction.creditedAccountId,
-          debitedAccountId: transaction.debitedAccountId,
-          value: transaction.value,
-          createdAt: transaction.createdAt,
-          creditedUsername,
-          debitedUsername
-        };
-      }))
-      return transactionsWithUsername;
-    }
-
-    return transactions;
-  }
-
-  async getTransactionsByFilter(
-    userId: number,
-    type: string,
-    month: string,
-    year: string
-  ) {
-    if (!userId || !type || !month || !year)
-      throw new CustomError("fields missing", 400);
-
-    const user = await this.userModel.getUserById(userId);
-    if (!user) throw new Error();
-
+  private getTypeFilter(type: string | undefined, user: User) {
     let typeFilter;
     switch (type) {
       case "cash-in":
@@ -115,12 +116,24 @@ export default class TransactionService {
         ];
         break;
     }
+    return typeFilter;
+  }
 
-    const transactions = await this.transactionModel.getTransactionsByFilter(
-      typeFilter,
-      month,
-      year
-    );
-    return transactions;
+  private async addUsername(transactions: Transaction[]) {
+    const transactionsWithUsername = await Promise.all(transactions.map(async (transaction) => {
+      const debitedUsername = await this.userModel.getUsernameByAccountId(transaction.debitedAccountId);
+      const creditedUsername = await this.userModel.getUsernameByAccountId(transaction.creditedAccountId);
+
+      return {
+        id: transaction.id,
+        creditedAccountId: transaction.creditedAccountId,
+        debitedAccountId: transaction.debitedAccountId,
+        value: transaction.value,
+        createdAt: transaction.createdAt,
+        creditedUsername,
+        debitedUsername
+      };
+    }))
+    return transactionsWithUsername;
   }
 }

@@ -54,13 +54,18 @@ export function ContextProvider({ children }) {
     })
   }
 
+  const updateTransactions = (value) => {
+    setTransactions(value);
+  }
+
   const contextValue = {
     user,
     getToken,
     token,
     changeBalance,
     transactions,
-    addTransaction
+    addTransaction,
+    updateTransactions
   }
 
   return(
