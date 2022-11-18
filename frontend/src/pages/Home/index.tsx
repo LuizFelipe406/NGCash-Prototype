@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(() => {
     getToken();
-  }, [getToken])
+  }, [getToken]);
 
   return (
     <div className="home-container default-page">

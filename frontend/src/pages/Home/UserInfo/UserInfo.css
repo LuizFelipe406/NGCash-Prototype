@@ -28,3 +28,9 @@
   height: 5vh;
   width: 40%;
 }
+
+.profile-logout-btn:hover {
+  background-color: rgb(221, 221, 221);
+  border: none;
+  color: black;
+}

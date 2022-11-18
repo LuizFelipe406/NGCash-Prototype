@@ -9,9 +9,9 @@ function UserInfo() {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.setItem('token', '');
-    navigate('/');
-  }
+    localStorage.setItem("token", "");
+    navigate("/");
+  };
 
   return (
     <div className="user-info-container">
@@ -22,7 +22,7 @@ function UserInfo() {
         <span>{user && `@${user.username}`}</span>
       </div>
       <button
-        onClick={ logout }
+        onClick={logout}
         type="button"
         className="white-box text profile-logout-btn mb-3"
       >

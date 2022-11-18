@@ -2,43 +2,52 @@ import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Context from "../../../context";
-import requestApi from '../../../utils/requestApi';
-import './TransactionForm.css';
+import requestApi from "../../../utils/requestApi";
+import "./TransactionForm.css";
 
 function TransactionForm() {
   const { user, token, changeBalance, addTransaction } = useContext(Context);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
-    if (user && (Number(value) > Number(user.account.balance))) {
+    if (user && Number(value) > Number(user.account.balance)) {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
     }
-  }, [user, value])
+  }, [user, value]);
 
-  const handleUsernameChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUsernameChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setUsername(value);
   };
 
-  const handleValueChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const handleValueChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setValue(value);
   };
 
   const clearInputs = () => {
-    setUsername('');
-    setValue('');
+    setUsername("");
+    setValue("");
     setUsernameInvalid(false);
-  }
+  };
 
   const transfer = async () => {
-    const { status, data } = await requestApi('POST', 'transaction', { username, value: Number(value) }, { authorization: token });
-    
+    const { status, data } = await requestApi(
+      "POST",
+      "transaction",
+      { username, value: Number(value) },
+      { authorization: token }
+    );
+
     if (status === 200) {
       changeBalance(Number(value));
       addTransaction({
@@ -64,7 +73,7 @@ function TransactionForm() {
           className="transaction-username-input text mb-3"
           value={username}
           type="text"
-          isInvalid={ usernameInvalid }
+          isInvalid={usernameInvalid}
           placeholder="Usuario"
           onChange={handleUsernameChange}
         />
@@ -90,7 +99,7 @@ function TransactionForm() {
             type="button"
             onClick={transfer}
             className="white-box text transaction-btn ms-2"
-            disabled={ isDisabled }
+            disabled={isDisabled}
           >
             Transferir
           </button>
@@ -99,6 +108,5 @@ function TransactionForm() {
     </div>
   );
 }
-
 
 export default TransactionForm;

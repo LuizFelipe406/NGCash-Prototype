@@ -15,31 +15,38 @@ function TransactionHistory() {
       </h1>
       <FilterForm />
       <div>
-      <table className="table text">
-        <tbody>
-          {transactions && transactions.map((transaction) => {
-            const date = new Date(transaction.createdAt);
-            const isDebit = transaction.debitedAccountId === user.accountId;
-            return (
-              <tr key={transaction.id}>
-                <th>{isDebit ? <BsBagDashFill /> : <BsFillBagPlusFill />}</th>
-                <th>{isDebit ? "cash-out" : "cash-in"}</th>
-                <th>{isDebit ? `para ${transaction.creditedUsername}` : `de ${transaction.debitedUsername}`}</th>
-                <th
-                  className={isDebit ? "text-danger" : "green-text"}
-                >{`R$ ${transaction.value.toFixed(2)}`}</th>
-                <th>
-                  {date.getDate() +
-                    " " +
-                    date.toLocaleString("en-us", { month: "short" }) +
-                    " " +
-                    date.getFullYear()}
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        <table className="table text">
+          <tbody>
+            {transactions &&
+              transactions.map((transaction) => {
+                const date = new Date(transaction.createdAt);
+                const isDebit = transaction.debitedAccountId === user.accountId;
+                return (
+                  <tr key={transaction.id}>
+                    <th>
+                      {isDebit ? <BsBagDashFill /> : <BsFillBagPlusFill />}
+                    </th>
+                    <th>{isDebit ? "cash-out" : "cash-in"}</th>
+                    <th>
+                      {isDebit
+                        ? `para ${transaction.creditedUsername}`
+                        : `de ${transaction.debitedUsername}`}
+                    </th>
+                    <th
+                      className={isDebit ? "text-danger" : "green-text"}
+                    >{`R$ ${transaction.value.toFixed(2)}`}</th>
+                    <th>
+                      {date.getDate() +
+                        " " +
+                        date.toLocaleString("en-us", { month: "short" }) +
+                        " " +
+                        date.getFullYear()}
+                    </th>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

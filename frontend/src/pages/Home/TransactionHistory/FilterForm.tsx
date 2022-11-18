@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Context from '../../../context';
-import requestApi from '../../../utils/requestApi';
+import Context from "../../../context";
+import requestApi from "../../../utils/requestApi";
 import "./FilterForm.css";
 
 const days: number[] = [];
@@ -39,46 +39,59 @@ function FilterForm() {
   const [month, setMonth] = useState("all");
   const [year, setYear] = useState("all");
 
-  const handleTypeChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTypeChange = ({
+    target,
+  }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setType(value);
   };
 
-  const handleDayChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDayChange = ({
+    target,
+  }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setDay(value);
   };
 
-  const handleMonthChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleMonthChange = ({
+    target,
+  }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setMonth(value);
   };
 
-  const handleYearChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleYearChange = ({
+    target,
+  }: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = target;
     setYear(value);
   };
 
   const filter = async () => {
-    let apiUrl = 'transaction/filtered/?';
+    let apiUrl = "transaction/filtered/?";
 
     apiUrl = apiUrl + `type=${type}`;
 
-    if (day !== 'all') {
+    if (day !== "all") {
       apiUrl = apiUrl + `&day=${day}`;
     }
-    
-    if (month !== 'all') {
+
+    if (month !== "all") {
       apiUrl = apiUrl + `&month=${month}`;
     }
 
-    if (year !== 'all') {
+    if (year !== "all") {
       apiUrl = apiUrl + `&year=${year}`;
     }
 
     console.log(apiUrl);
 
-    const { data } = await requestApi('GET', apiUrl, {}, { authorization: token });
+    const { data } = await requestApi(
+      "GET",
+      apiUrl,
+      {},
+      { authorization: token }
+    );
 
     console.log(data);
 
@@ -93,7 +106,7 @@ function FilterForm() {
             <Form.Label className="text">Tipo</Form.Label>
             <Form.Select
               value={type}
-              onChange={ handleTypeChange }
+              onChange={handleTypeChange}
               className="text filter-select"
             >
               <option value="both">ambos</option>
@@ -106,7 +119,7 @@ function FilterForm() {
             <Form.Label className="text">Dia</Form.Label>
             <Form.Select
               value={day}
-              onChange={ handleDayChange }
+              onChange={handleDayChange}
               className="text filter-select"
             >
               <option value="all">todos</option>
@@ -121,7 +134,7 @@ function FilterForm() {
             <Form.Label className="text">Mês</Form.Label>
             <Form.Select
               value={month}
-              onChange={ handleMonthChange }
+              onChange={handleMonthChange}
               className="text filter-select"
             >
               <option value="all">todos</option>
@@ -136,7 +149,7 @@ function FilterForm() {
             <Form.Label className="text">Ano</Form.Label>
             <Form.Select
               value={year}
-              onChange={ handleYearChange }
+              onChange={handleYearChange}
               className="text filter-select"
             >
               <option value="all">todos</option>
@@ -151,7 +164,7 @@ function FilterForm() {
             <button
               type="button"
               className="black-box mt-4 text filter-btn"
-              onClick={ filter }
+              onClick={filter}
             >
               Filtrar
             </button>
