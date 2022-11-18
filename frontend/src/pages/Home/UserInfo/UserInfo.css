@@ -1,3 +1,10 @@
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .profile-container {
   display: flex;
   align-items: center;
@@ -14,4 +21,10 @@
   padding: 0.4em 0;
   background-color: #383838;
   border-radius: 2em;
+  width: 100%;
+}
+
+.profile-logout-btn {
+  height: 5vh;
+  width: 40%;
 }
