@@ -37,12 +37,12 @@ function Register() {
       enabledButton();
     }, [username, password]);
   
-  const handleUsernameChange = ({ target }) => {
+  const handleUsernameChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setUsername(value);
   };
   
-  const handlePasswordChange = ({ target }) => {
+  const handlePasswordChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setPassword(value);
   };

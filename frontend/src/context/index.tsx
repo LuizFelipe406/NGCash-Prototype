@@ -1,17 +1,20 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, PropsWithChildren } from "react";
+import ITransaction from "../interfaces/ITransaction";
+import IUser from "../interfaces/IUser";
 import requestApi from '../utils/requestApi';
 
-const Context = createContext();
+const Context = createContext({});
 
 export default Context;
 
-export function ContextProvider({ children }) {
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState({
-    account: { balance: 0 },
-    username: ''
+export function ContextProvider({ children }: PropsWithChildren) {
+  const [token, setToken] = useState('');
+  const [user, setUser] = useState<IUser>({
+    account: { balance: 0, id: 0 },
+    username: '',
+    accountId: 0,
   });
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
   
   useEffect(() => {
     const getUserData = async () => {
@@ -34,11 +37,11 @@ export function ContextProvider({ children }) {
   }, [token])
 
   const getToken = () => {
-    const storageToken = localStorage.getItem('token');
+    const storageToken = localStorage.getItem('token') || '';
     setToken(storageToken);
   }
 
-  const changeBalance = (value) => {
+  const changeBalance = (value: number) => {
     setUser((oldUser) => ({
       ...oldUser,
       account: {
@@ -48,13 +51,13 @@ export function ContextProvider({ children }) {
     }))
   }
 
-  const addTransaction = (value) => {
+  const addTransaction = (value: ITransaction) => {
     setTransactions((oldTransactions) => {
       return [...oldTransactions, value];
     })
   }
 
-  const updateTransactions = (value) => {
+  const updateTransactions = (value: ITransaction[] | []) => {
     setTransactions(value);
   }
 

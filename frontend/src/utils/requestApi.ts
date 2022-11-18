@@ -1,4 +1,9 @@
 import axios from 'axios';
+import 'dotenv/config';
+
+type headers = {
+  authorization: string;
+}
 
 const HOST = process.env.REACT_APP_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
@@ -12,7 +17,7 @@ const request = axios.create({
   }
 })
 
-const walletApi = async (method, endpoint, body, headers) => request
+const walletApi = async (method: string, endpoint: string, body: {}, headers: headers) => request
   .request({ method, url: endpoint, data: body, headers})
     .then(({ status, data }) => ({ status, data }))
     .catch((error) => error.toJSON());
