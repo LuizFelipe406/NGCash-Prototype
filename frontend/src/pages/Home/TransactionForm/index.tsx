@@ -48,7 +48,7 @@ function TransactionForm() {
       { authorization: token }
     );
 
-    if (status === 200) {
+    if (status === 201) {
       changeBalance(Number(value));
       addTransaction({
         ...data,
