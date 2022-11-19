@@ -10,10 +10,10 @@ function TransactionForm() {
   const [username, setUsername] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [value, setValue] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    if (user && Number(value) > Number(user.account.balance)) {
+    if ((user && Number(value) > Number(user.account.balance)) || Number(value) === 0) {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
