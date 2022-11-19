@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { app } from '../../app';
 import Account from '../../database/models/Account';
 import User from '../../database/models/User';
-import mockUser from './mockUser';
+import { mockUser } from './mock';
 import sequelize from '../../database/models/index';
 import { Transaction } from 'sequelize';
 import JWT from '../../auth/JWT';

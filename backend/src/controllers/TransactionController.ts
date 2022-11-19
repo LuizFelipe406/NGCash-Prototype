@@ -19,7 +19,7 @@ export default class TransactionController {
         username,
         value
       );
-      res.status(200).json(newTransfer);
+      res.status(201).json(newTransfer);
     } catch (error) {
       next(error);
     }
