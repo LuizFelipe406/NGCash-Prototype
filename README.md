@@ -1,4 +1,4 @@
-# NGCash-Tech-Challenge
+# NGCash-Prototype
 
    <summary><strong>👨‍💻 Como Rodar com Docker</strong></summary><br />
 
@@ -13,5 +13,3 @@ O Projeto também conta com testes de integração desenvolvidos para o back end
 
 - Acesse o terminal do container backend atráves do comando: docker exec -it ngcash_backend sh
 - Execute o comando npm test
-
-Agradeço pela oportunidade de participar do Processo Seletivo, estou muito animado em continua-lo, aguardo feedbacks e fico a disposição para eventuais duvidas sobre o projeto.
